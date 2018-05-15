@@ -12,41 +12,42 @@
                         <p class="subtitle has-text-grey has-text-centered">Create a New Account</p>
     
                         <div class="box">
-                            <form action="">
+                            <form action="{{ url('Register') }}" method="post">
+                            {{ csrf_field() }}
                                 <div class="field">
                                     <label class="label">Nama Lengkap</label>
                                     <div class="control">
-                                    <input class="input" type="text">
+                                    <input class="input" type="text" name="nama" placeHolder="Nama Lengkap" required>
                                     </div>
                                 </div>
                                 <div class="field">
                                     <label class="label">No KTP</label>
                                     <div class="control">
-                                    <input class="input" type="text">
+                                    <input class="input" type="text" name="no_ktp" placeHolder="Nomor KTP" required> 
                                     </div>
                                 </div>
                                 <div class="field">
                                     <label class="label">Username</label>
                                     <div class="control">
-                                    <input class="input" type="text">
+                                    <input class="input" type="text" name="username" placeHolder="Username" required>
                                     </div>
                                 </div>
                                 <div class="field">
                                     <label class="label">Password</label>
                                     <div class="control">
-                                    <input class="input" type="password">
+                                    <input class="input" type="password" name="password" placeHolder="Password" required>
                                     </div>
                                 </div>
                                 <div class="field">
                                     <label class="label">No HP</label>
                                     <div class="control">
-                                    <input class="input" type="text">
+                                    <input class="input" type="number" name="no_hp" placeHolder="Nomor HP" required>
                                     </div>
                                 </div>
                                 <div class="field">
                                     <label class="label">Alamat</label>
                                     <div class="control">
-                                    <textarea class="textarea" name="" id=""></textarea>
+                                    <textarea class="textarea" name="alamat" id=""></textarea required>
                                     </div>
                                 </div>
                                 <div class="control">
@@ -55,7 +56,7 @@
                             </form>
                         </div>
                         <p class="has-text-grey has-text-centered">
-                            <a href="../">Sign In</a> &nbsp;·&nbsp;
+                            <a href="{{ url('SignIn') }}">Sign In</a> &nbsp;·&nbsp;
                             <a href="../">Forgot Password</a> &nbsp;·&nbsp;
                             <a href="../">Need Help?</a>
                         </p>

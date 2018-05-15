@@ -13,3 +13,4 @@
 
 Route::get('/SignIn','ProsesController@createSignIn');
 Route::get('/Register','ProsesController@createRegister');
+Route::post('/Register','ProsesController@Register');
