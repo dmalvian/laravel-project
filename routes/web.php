@@ -11,6 +11,9 @@
 |
 */
 
-Route::get('/SignIn','ProsesController@createSignIn');
-Route::get('/Register','ProsesController@createRegister');
-Route::post('/Register','ProsesController@Register');
+Route::get('/signin','ProsesController@createSignIn');
+Route::get('/register','ProsesController@createRegister');
+Route::post('/register','ProsesController@Register');
+Route::get('/dashboard', function() {
+    return view('dashboard');
+});
