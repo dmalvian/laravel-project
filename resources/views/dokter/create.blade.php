@@ -46,6 +46,16 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="field">
+                                    <label class="label">Jadwal Praktik</label>
+                                    <div class="control">
+                                        <div class="select">
+                                            <select name="jadwal">
+                                                <option>Pilih Jadwal Praktik</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="control">
                                     <button class="button is-info is-medium" type="submit">Submit</button>
                                 </div>
