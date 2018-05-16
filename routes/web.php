@@ -17,3 +17,15 @@ Route::post('/register','ProsesController@Register');
 Route::get('/dashboard', function() {
     return view('dashboard');
 });
+Route::get('/patient/create', function() {
+    return view('pasien.create');
+});
+Route::get('/spesialis/create', function() {
+    return view('spesialis.create');
+});
+Route::get('/rs/create', function() {
+    return view('rs.create');
+});
+Route::get('/dokter/create', function() {
+    return view('dokter.create');
+});
