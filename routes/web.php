@@ -17,7 +17,7 @@ Route::post('/register','ProsesController@Register');
 Route::get('/dashboard', function() {
     return view('dashboard');
 });
-Route::get('/patient/create', function() {
+Route::get('/pasien/create', function() {
     return view('pasien.create');
 });
 Route::get('/spesialis/create', function() {
@@ -29,3 +29,7 @@ Route::get('/rs/create', function() {
 Route::get('/dokter/create', function() {
     return view('dokter.create');
 });
+
+Route::get('/address/provinsi', 'AddressController@getProvinsi');
+Route::get('/address/kota/{id}', 'AddressController@getKota');
+Route::get('/address/kecamatan/{id}', 'AddressController@getKecamatan');
