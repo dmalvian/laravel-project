@@ -33,15 +33,21 @@ class ProsesController extends Controller
     public function Register(Request $request)
     {
         $akun = new Akun();
-        $akun -> username = $request -> username;
-        $akun -> nama_lengkap = $request -> nama;
-        $akun -> no_ktp = $request -> no_ktp;
-        $akun -> no_hp = $request -> no_hp;
-        $akun -> alamat = $request -> alamat;
-        $akun -> password = $request -> password;
-        $akun -> save();
+        $validate = Akun::whereRaw("username = '$request->username'")->first();
+        if($validate)
+        {
+            return redirect('register')->with('message','Username Telah Digunakan');
+        }else{
+            $akun -> username = $request -> username;
+            $akun -> nama_lengkap = $request -> nama;
+            $akun -> no_ktp = $request -> no_ktp;
+            $akun -> no_hp = $request -> no_hp;
+            $akun -> alamat = $request -> alamat;
+            $akun -> password = $request -> password;
+            $akun -> save();
 
-        return redirect('signin');
+            return redirect('signin');
+        }
     }
 
     public function signin(Request $request)
