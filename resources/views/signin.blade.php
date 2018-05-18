@@ -9,28 +9,34 @@
                 <div class="columns">
                     <div class="column is-4 is-offset-4">
                         <h3 class="title has-text-grey">Login</h3>
-                        <p class="subtitle has-text-grey">Please login to proceed.</p>
-    
+                        <p class="subtitle has-text-grey">
+                        @if ( Session::get('message') != '' )
+                            {{ Session::get('message') }}
+                        @else
+                            Please login to proceed.
+                        @endif
+                        </p>
                         <div class="box">
-                            <form action="">
+                            <form action="{{ url('signin') }}" method="post">
+                            @csrf
                                 <div class="field">
                                     <label class="label">Username</label>
                                     <div class="control">
-                                    <input class="input" type="text">
+                                    <input class="input" type="text" name="username" placeHolder="Username" value="{{ old('username') }}" required>
                                     </div>
                                 </div>
     
                                 <div class="field">
                                     <label class="label">Password</label>
                                     <div class="control">
-                                    <input class="input" type="password">
+                                    <input class="input" type="password" placeHolder="Password" name="password" required>
                                     </div>
                                 </div>
                                 <button class="button is-block is-info is-large is-fullwidth" type="submit">Login</button>
                             </form>
                         </div>
                         <p class="has-text-grey">
-                            <a href="{{ url('Register') }}">Sign Up</a> &nbsp;·&nbsp;
+                            <a href="{{ url('register') }}">Sign Up</a> &nbsp;·&nbsp;
                             <a href="../">Forgot Password</a> &nbsp;·&nbsp;
                             <a href="../">Need Help?</a>
                         </p>

@@ -12,7 +12,7 @@
                         <p class="subtitle has-text-grey has-text-centered">Create a New Account</p>
     
                         <div class="box">
-                            <form action="{{ url('Register') }}" method="post">
+                            <form action="{{ url('register') }}" method="post">
                             {{ csrf_field() }}
                                 <div class="field">
                                     <label class="label">Nama Lengkap</label>
@@ -56,7 +56,7 @@
                             </form>
                         </div>
                         <p class="has-text-grey has-text-centered">
-                            <a href="{{ url('SignIn') }}">Sign In</a> &nbsp;·&nbsp;
+                            <a href="{{ url('signin') }}">Sign In</a> &nbsp;·&nbsp;
                             <a href="../">Forgot Password</a> &nbsp;·&nbsp;
                             <a href="../">Need Help?</a>
                         </p>

@@ -13,10 +13,10 @@ return [
     |
     */
 
-    'defaults' => [
-        'guard' => 'web',
-        'passwords' => 'users',
-    ],
+    // 'defaults' => [
+    //     'guard' => 'web',
+    //     'passwords' => 'users',
+    // ],
 
     /*
     |--------------------------------------------------------------------------
@@ -45,6 +45,10 @@ return [
             'driver' => 'token',
             'provider' => 'users',
         ],
+        'akun' => [
+            'driver' => 'token',
+            'provider' => 'akun'
+        ],
     ],
 
     /*
@@ -67,7 +71,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => App\Akun::class,
         ],
 
         // 'users' => [

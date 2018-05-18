@@ -10,13 +10,15 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/', function() {
+    return view('index');
+});
 Route::get('/signin','ProsesController@createSignIn');
+Route::post('/signin','ProsesController@signin');
 Route::get('/register','ProsesController@createRegister');
 Route::post('/register','ProsesController@Register');
-Route::get('/dashboard', function() {
-    return view('dashboard');
-});
+Route::get('/logout','ProsesController@getLogout');
+Route::get('/dashboard','ProsesController@gotoDashboard');
 Route::get('/pasien/create', function() {
     return view('pasien.create');
 });
