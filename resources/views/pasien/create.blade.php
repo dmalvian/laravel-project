@@ -2,6 +2,44 @@
 
 @section('title','Add New Patient')
 
+@section('assets')
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+<script>
+    $(document).ready(function(){
+        $.getJSON("{{ url('address/provinsi') }}", function(result){
+            $.each(result, function(i, item){
+                $("<option>"+item.name+"</option>").attr('value', item.id).appendTo("#provinsi");
+            });
+        });
+
+        $("#provinsi").change(function() {
+            var id_province = $('option:selected', this).attr('value');
+            $.getJSON("{{ url('address/kota') }}/"+id_province, function(result){
+                $("#kota").html($("<option>Pilih Kota</option>").attr('value', ''));
+                $("#kecamatan").html($("<option>Pilih Kecamatan</option>").attr('value', ''));
+                $.each(result, function(i, item){
+                    $("<option>"+item.name+"</option>").attr('value', item.id).appendTo("#kota");
+                });
+            });
+        });
+
+        $("#kota").change(function() {
+            var id_regency = $('option:selected', this).attr('value');
+            $.getJSON("{{ url('address/kecamatan') }}/"+id_regency, function(result){
+                $("#kecamatan").html($("<option>Pilih Kecamatan</option>").attr('value', ''));
+                $.each(result, function(i, item){
+                    $("<option>"+item.name+"</option>").attr('value', item.id).appendTo("#kecamatan");
+                });
+            });
+        });
+    });
+</script>
+@endsection
+
 @section('content')    
     <section class="hero is-light is-fullheight">
         <div class="hero-body">
@@ -125,8 +163,8 @@
                                     <label class="label">Provinsi</label>
                                     <div class="control">
                                         <div class="select">
-                                            <select name="provinsi">
-                                                <option>Pilih Provinsi</option>
+                                            <select name="provinsi" id="provinsi" required>
+                                                <option value="">Pilih Provinsi</option>
                                             </select>
                                         </div>
                                     </div>
@@ -135,8 +173,8 @@
                                     <label class="label">Kota</label>
                                     <div class="control">
                                         <div class="select">
-                                            <select name="kota">
-                                                <option>Pilih Kota</option>
+                                            <select name="kota" id="kota" required>
+                                                <option value="">Pilih Kota</option>
                                             </select>
                                         </div>
                                     </div>
@@ -145,8 +183,8 @@
                                     <label class="label">Kecamatan</label>
                                     <div class="control">
                                         <div class="select">
-                                            <select name="kecamatan">
-                                                <option>Pilih Kecamatan</option>
+                                            <select name="kecamatan" id="kecamatan" required>
+                                                <option value="">Pilih Kecamatan</option>
                                             </select>
                                         </div>
                                     </div>
