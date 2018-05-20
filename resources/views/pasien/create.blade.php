@@ -47,11 +47,14 @@
                 <div class="columns">
                     <div class="column is-6 is-offset-3">
                         <h3 class="title has-text-grey has-text-centered">Patient</h3>
-                        <p class="subtitle has-text-grey has-text-centered">Add a New Patient</p>
-    
+                        @if ( Session::get('message') != '' )
+                            <p class="subtitle has-text-danger has-text-centered">{{ Session::get('message') }}</p>
+                        @else
+                            <p class="subtitle has-text-grey has-text-centered">Tambahkan Pasien Anda!</p>
+                        @endif
                         <div class="box">
-                            <form action="{{ url('Register') }}" method="post">
-                            {{ csrf_field() }}
+                            <form action="{{ url('/pasien/create') }}" method="post">
+                            @csrf
                                 <div class="field">
                                     <label class="label">Nama Lengkap</label>
                                     <div class="control">
@@ -61,7 +64,7 @@
                                 <div class="field">
                                     <label class="label">No KTP</label>
                                     <div class="control">
-                                    <input class="input" type="text" name="no_ktp" placeHolder="Nomor KTP" required> 
+                                    <input class="input" type="number" name="no_ktp" placeHolder="Nomor KTP" required> 
                                     </div>
                                 </div>
                                 <div class="field">
@@ -80,11 +83,11 @@
                                     <label class="label">Jenis Kelamin</label>
                                     <div class="control">
                                         <label class="radio">
-                                            <input type="radio" name="gender" value="1">
+                                            <input type="radio" name="gender" value="laki-laki">
                                             Laki - laki
                                         </label>
                                         <label class="radio">
-                                            <input type="radio" name="gender" value="2">
+                                            <input type="radio" name="gender" value="perempuan">
                                             Perempuan
                                         </label>
                                     </div>
@@ -94,12 +97,12 @@
                                     <div class="control">
                                         <div class="select">
                                             <select name="agama">
-                                                <option>Islam</option>
-                                                <option>Kristen</option>
-                                                <option>Khatolik</option>
-                                                <option>Hindu</option>
-                                                <option>Budha</option>
-                                                <option>Kong Hu Cu</option>
+                                                <option value="Islam">Islam</option>
+                                                <option value="Kristen">Kristen</option>
+                                                <option value="Khatolik">Khatolik</option>
+                                                <option value="Hindu">Hindu</option>
+                                                <option value="Budha">Budha</option>
+                                                <option value="Kong Hu Cu">Kong Hu Cu</option>
                                             </select>
                                         </div>
                                     </div>
@@ -109,10 +112,10 @@
                                     <div class="control">
                                         <div class="select">
                                             <select name="gol_darah">
-                                                <option>A</option>
-                                                <option>B</option>
-                                                <option>AB</option>
-                                                <option>O</option>
+                                                <option value="A">A</option>
+                                                <option value="B">B</option>
+                                                <option value="AB">AB</option>
+                                                <option value="O">O</option>
                                             </select>
                                         </div>
                                     </div>
@@ -127,15 +130,15 @@
                                     <label class="label">Status Perkawinan</label>
                                     <div class="control">
                                         <label class="radio">
-                                            <input type="radio" name="status_kawin" value="1">
+                                            <input type="radio" name="status_kawin" value="Belum Menikah">
                                             Belum Menikah
                                         </label>
                                         <label class="radio">
-                                            <input type="radio" name="status_kawin" value="2">
+                                            <input type="radio" name="status_kawin" value="Menikah">
                                             Menikah
                                         </label>
                                         <label class="radio">
-                                            <input type="radio" name="status_kawin" value="3">
+                                            <input type="radio" name="status_kawin" value="Janda/Duda">
                                             Janda / Duda
                                         </label>
                                     </div>
@@ -144,11 +147,11 @@
                                     <label class="label">Status Kewarganegaraan</label>
                                     <div class="control">
                                         <label class="radio">
-                                            <input type="radio" name="kewarganegaraan" value="1">
+                                            <input type="radio" name="kewarganegaraan" value="WNI">
                                             WNI
                                         </label>
                                         <label class="radio">
-                                            <input type="radio" name="kewarganegaraan" value="2">
+                                            <input type="radio" name="kewarganegaraan" value="WNA">
                                             WNA
                                         </label>
                                     </div>
@@ -195,17 +198,26 @@
                                     <input class="input" type="text" name="kode_pos" placeHolder="Kode Pos" required> 
                                     </div>
                                 </div>
+                                <div class="field">
+                                    <label class="label">Nomor BPJS</label>
+                                    <div class="control">
+                                    <input class="input" type="text" name="no_bpjs" placeHolder="Nomor BPJS"> 
+                                    <span class="has-text-danger">*Tidak Wajib Diisi</span>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <label class="label">Nomor Rujukan</label>
+                                    <div class="control">
+                                    <input class="input" type="text" name="no_rujukan" placeHolder="Nomor Rujukan"> 
+                                    <span class="has-text-danger">*Tidak Wajib Diisi</span>
+                                    </div>
+                                </div>
                                 
                                 <div class="control">
                                     <button class="button is-info is-medium" type="submit">Register</button>
                                 </div>
                             </form>
                         </div>
-                        <p class="has-text-grey has-text-centered">
-                            <a href="{{ url('SignIn') }}">Sign In</a> &nbsp;·&nbsp;
-                            <a href="../">Forgot Password</a> &nbsp;·&nbsp;
-                            <a href="../">Need Help?</a>
-                        </p>
                     </div>
                 </div>
             </div>

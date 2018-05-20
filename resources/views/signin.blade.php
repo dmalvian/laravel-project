@@ -9,13 +9,11 @@
                 <div class="columns">
                     <div class="column is-4 is-offset-4">
                         <h3 class="title has-text-grey">Login</h3>
-                        <p class="subtitle has-text-grey">
                         @if ( Session::get('message') != '' )
-                            {{ Session::get('message') }}
+                            <p class="subtitle has-text-danger has-text-centered">{{ Session::get('message') }}</p>
                         @else
-                            Please login to proceed.
+                            <p class="subtitle has-text-grey has-text-centered">Please login to proceed.</p>
                         @endif
-                        </p>
                         <div class="box">
                             <form action="{{ url('signin') }}" method="post">
                             @csrf

@@ -9,7 +9,8 @@ use App\Kecamatan;
 
 class AddressController extends Controller
 {
-    public function getProvinsi() {
+    public function getProvinsi() 
+    {
         $provinsi = Provinsi::all();
 
         return response()->json($provinsi);

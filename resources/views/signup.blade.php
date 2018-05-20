@@ -11,7 +11,7 @@
                         <h3 class="title has-text-grey has-text-centered">Sign Up</h3>
                         
                         @if ( Session::get('message') != '' )
-                        <p class="subtitle has-text-grey has-text-centered">{{ Session::get('message') }}</p>
+                        <p class="subtitle has-text-danger has-text-centered">{{ Session::get('message') }}</p>
                         @else
                         <p class="subtitle has-text-grey has-text-centered">Create New Account.</p>
                         @endif
