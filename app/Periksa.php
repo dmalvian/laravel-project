@@ -9,6 +9,4 @@ class Periksa extends Model
     protected $table = 'tbl_periksa';
 
     protected $primarykey = 'id';
-
-    public $timestamps = false;
 }

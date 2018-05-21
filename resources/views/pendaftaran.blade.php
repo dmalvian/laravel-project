@@ -32,7 +32,7 @@
             $.getJSON("{{ url('medic/dokter') }}/"+id_dokter, function(result){
                 $("#dokter").html($("<option>Pilih Dokter</option>").attr('value', ''));
                 $.each(result, function(i, item){
-                    $("<option>"+item.nama_dokter+"</option>").attr('value', item.NIDN).appendTo("#dokter");
+                    $("<option>"+item.nama_dokter+" - "+item.hari+"</option>").attr('value', item.NIDN).appendTo("#dokter");
                 });
             });
         });

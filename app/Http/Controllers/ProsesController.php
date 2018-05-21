@@ -150,25 +150,37 @@ class ProsesController extends Controller
     {
         $getdokter = $request -> dokter;
         $gettanggal = $request -> tgl_periksa;
+        $getrs = $request -> rumah_sakit;
+        $getspesialis = $request -> spesialis;
+        $getnama = $request -> nama;
 
-        $validate = Periksa::whereRaw("tgl_periksa = '$gettanggal' && dokter = '$getdokter'")->first();
+        $pasien = Pasien::whereRaw("nama_pasien = '".$getnama."'")->first();
+        $validate = Periksa::whereRaw("rumah_sakit = '$getrs' && spesialis = '$getspesialis' && tgl_periksa = '$gettanggal' && dokter = '$getdokter' && no_ktp = '".$pasien -> no_ktp."'")->first();
 
         if($validate)
         {
             return redirect('pendaftaran')->with('message','Pasien sudah mendaftar pada hari tersebut!');
         }else{
-            $pasien = Pasien::whereRaw("nama_pasien = '".$request -> nama."'")->first();
 
             $pendaftar = new Periksa();
             $pendaftar -> tgl_periksa = $gettanggal ;
-            $pendaftar -> rumah_sakit = $request -> rumah_sakit ;
-            $pendaftar -> spesialis = $request -> spesialis ;
+            $pendaftar -> rumah_sakit = $getrs ;
+            $pendaftar -> spesialis = $getspesialis ;
             $pendaftar -> dokter = $getdokter ;
             $pendaftar -> no_ktp = $pasien -> no_ktp  ;
 
             $pendaftar->save();
 
-            return $pendaftar;
+            //get data
+            $daftar = Periksa::whereRaw("tgl_periksa = '$gettanggal' && dokter = '$getdokter'")->get();
+            //give name json
+            $output = json_encode(array('urutan' => $daftar));
+            //get data with index;
+            
+
+            return $output;
+
+            //return view('result',compact('output'));
         }
     }
 
