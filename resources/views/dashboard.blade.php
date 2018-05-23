@@ -3,15 +3,6 @@
 @section('title','Dashboard')
 
 @section('assets')
-<<<<<<< HEAD
-
-    <a href="{{ url('logout') }}">Logout</a> 
-    <br>
-    <a href="{{ url('/pasien/create') }}">Daftarkan Pasien Baru</a>
-    <br>
-    <a href="{{ url('/pendaftaran') }}">Daftar </a>
-    <p>Username : {{ dd(session()->get('id')) }}</p>
-=======
 <nav class="navbar has-shadow">
     <div class="container">
         <div class="navbar-brand"><a class="navbar-item" href="{{ url('dashboard') }}"><h2 class="title">RSing</h2></a>
@@ -82,5 +73,4 @@
   </div>
 </footer>
 
->>>>>>> 0855711c5c4b5774f2a464823fe2b7e3c27dee66
 @endsection 
