@@ -181,9 +181,21 @@ class ProsesController extends Controller
             $pendaftar->save();
 
             //get data
+<<<<<<< HEAD
             $daftar = Periksa::whereRaw("tgl_periksa = '$gettanggal' && dokter = '".$dokter -> NIDN."'")->count();            
 
             return view('result',compact('daftar'));
+=======
+            $daftar = Periksa::whereRaw("tgl_periksa = '$gettanggal' && dokter = '$getdokter'")->get();
+            //give name json
+            $output = json_encode(array('urutan' => $daftar));
+            //get data with index;
+            
+
+            //return $output;
+
+            return view('result',compact('output'));
+>>>>>>> 0855711c5c4b5774f2a464823fe2b7e3c27dee66
         }
     }
 
