@@ -46,3 +46,11 @@ Route::get('/rs/create', function() {
 Route::get('/dokter/create', function() {
     return view('dokter.create');
 });
+
+Route::get('qr-code/{id}', function ($id) {
+  return QRCode::text($id)->setSize(8)->png();
+});
+
+Route::get('qr', function () {
+    return view('result');
+});

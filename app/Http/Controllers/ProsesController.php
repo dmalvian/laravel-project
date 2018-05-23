@@ -178,9 +178,9 @@ class ProsesController extends Controller
             //get data with index;
             
 
-            return $output;
+            //return $output;
 
-            //return view('result',compact('output'));
+            return view('result',compact('output'));
         }
     }
 
