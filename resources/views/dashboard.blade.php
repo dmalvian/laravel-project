@@ -3,6 +3,7 @@
 @section('title','Dashboard')
 
 @section('assets')
+
     <a href="{{ url('logout') }}">Logout</a> 
     <br>
     <a href="{{ url('/pasien/create') }}">Daftarkan Pasien Baru</a>

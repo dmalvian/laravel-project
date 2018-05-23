@@ -3,6 +3,5 @@
 @section('title','Dashboard')
 
 @section('assets')
-    Hasil
-    <p>Username : {{  }}</p>
+    <p>No Urut : {{ $daftar }}</p>
 @endsection 
