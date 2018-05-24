@@ -3,8 +3,8 @@
 @section('title','Landing Page')
 
 @section('assets')
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-extensions@1.0.28/bulma-carousel/dist/bulma-carousel.min.css">
-  <script defer src="https://cdn.jsdelivr.net/npm/bulma-extensions@1.0.28/bulma-carousel/dist/bulma-carousel.min.js"></script>
+  <link rel="stylesheet" href="{{ asset('css/bulma-carousel.min.css') }}">
+<script defer src="{{ asset('js/bulma-carousel.min.js') }}"></script>
   <style>
     .carousel-cover {
       background: linear-gradient(

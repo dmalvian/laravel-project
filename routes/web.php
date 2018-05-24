@@ -54,3 +54,9 @@ Route::get('qr-code/{id}', function ($id) {
 Route::get('qr', function () {
     return view('result');
 });
+
+Route::get('pasien', 'ProsesController@indexPasien');
+
+Route::get('guide', function() {
+    return view('guide');
+});
