@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Akun;
 use App\Pasien;
@@ -209,6 +208,24 @@ class ProsesController extends Controller
            $pasien = Pasien::whereRaw("id_akun = '". session()->get('id')."'")->get();
 
            return response()->json($pasien);
+        }else{
+            return redirect('dashboard');
+        }
+    }
+
+    public function indexPasien() {
+        if(session()->get('username')!= null){
+            $id = session()->get('id');
+
+            $pasien = DB::table('tbl_pasien')
+                    ->join('districts', 'tbl_pasien.kecamatan', '=', 'districts.id')
+                    ->join('regencies', 'tbl_pasien.kota', '=', 'regencies.id')
+                    ->join('provinces', 'tbl_pasien.provinsi', '=', 'provinces.id')
+                    ->select('tbl_pasien.*', 'districts.name as nkecamatan', 'regencies.name as nkota', 'provinces.name as nprovinsi')
+                    ->where('tbl_pasien.id_akun', $id)
+                    ->get();
+            
+            return view('pasien.index', compact('pasien'));
         }else{
             return redirect('dashboard');
         }
