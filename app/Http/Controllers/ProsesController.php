@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
+use DB;
 use App\Akun;
 use App\Pasien;
 use App\Periksa;
