@@ -15,6 +15,7 @@
                             <img src="{{ url('qr-code/12345') }}" alt="">
                             </figure>
                             <h2 class="subtitle">12345</h2>
+                            <h3>No Urut : {{ $daftar }}</h3>
                         </div>
                         <p class="has-text-grey">
                             Konfirmasi pendaftaran akan dikirimkan via SMS.

@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Akun;
 use App\Pasien;
 use App\Periksa;
@@ -75,6 +74,7 @@ class ProsesController extends Controller
                 }else{
                     $request->session()->put('username', $users -> username);
                     $request->session()->put('id', $users -> Id_akun);
+                    alert()->success('Post Created', 'Successfully');
                     return redirect('dashboard');
                 }
             }else{
@@ -84,7 +84,9 @@ class ProsesController extends Controller
 
     public function gotoDashboard()
 	{
-        if(session()->get('username')!= null) return view('dashboard');
+        if(session()->get('username')!= null){
+            return view('dashboard');
+        } 
         
 		return redirect('signin')->with('message','Login Dulu!');
     }
@@ -156,7 +158,12 @@ class ProsesController extends Controller
         $getnama = $request -> nama;
 
         $pasien = Pasien::whereRaw("nama_pasien = '".$getnama."'")->first();
-        $validate = Periksa::whereRaw("rumah_sakit = '$getrs' && spesialis = '$getspesialis' && tgl_periksa = '$gettanggal' && dokter = '$getdokter' && no_ktp = '".$pasien -> no_ktp."'")->first();
+        $rs = RS::whereRaw("nama_RS = '".$getrs."'")->first();
+        $spesialis = Spesialis::whereRaw("nama_spesialis = '".$getspesialis."'")->first();
+        $dokter = Dokter::whereRaw("nama_dokter = '".$getdokter."'")->first();
+
+
+        $validate = Periksa::whereRaw("rumah_sakit = '".$rs -> kode_RS."' && spesialis = '".$spesialis -> kode_spesialis."' && tgl_periksa = '$gettanggal' && dokter = '".$dokter -> NIDN."' && no_ktp = '".$pasien -> no_ktp."'")->first();
 
         if($validate)
         {
@@ -165,23 +172,17 @@ class ProsesController extends Controller
 
             $pendaftar = new Periksa();
             $pendaftar -> tgl_periksa = $gettanggal ;
-            $pendaftar -> rumah_sakit = $getrs ;
-            $pendaftar -> spesialis = $getspesialis ;
-            $pendaftar -> dokter = $getdokter ;
+            $pendaftar -> rumah_sakit = $rs -> kode_RS ;
+            $pendaftar -> spesialis = $spesialis -> kode_spesialis ;
+            $pendaftar -> dokter = $dokter -> NIDN ;
             $pendaftar -> no_ktp = $pasien -> no_ktp  ;
 
             $pendaftar->save();
 
             //get data
-            $daftar = Periksa::whereRaw("tgl_periksa = '$gettanggal' && dokter = '$getdokter'")->get();
-            //give name json
-            $output = json_encode(array('urutan' => $daftar));
-            //get data with index;
-            
+            $daftar = Periksa::whereRaw("tgl_periksa = '$gettanggal' && dokter = '".$dokter -> NIDN."'")->count();            
 
-            //return $output;
-
-            return view('result',compact('output'));
+            return view('result',compact('daftar'));
         }
     }
 
