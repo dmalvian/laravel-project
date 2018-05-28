@@ -10,9 +10,10 @@
                 <th>No KTP</th>
                 <th>Nama Pasien</th>
                 <th>Tanggal Lahir</th>
-                <th>Kecamatan</th>
+                <th>Gol. Darah</th>
                 <th>Kota</th>
-                <th>Provinsi</th>
+                <th>Nomor BPJS</th>
+                <th>Nomor Rujukan</th>
             </tr>
         </thead>
         <tbody>
@@ -21,9 +22,10 @@
                 <td>{{ $a->no_ktp }}</td>
                 <td>{{ $a->nama_pasien }}</td>
                 <td>{{ $a->tgl_lahir }}</td>
-                <td>{{ $a->nkecamatan }}</td>
+                <td>{{ $a->golongan_darah }}</td>
                 <td>{{ $a->nkota }}</td>
-                <td>{{ $a->nprovinsi }}</td>
+                <td>{{ $a->nomor_bpjs }}</td>
+                <td>{{ $a->nomor_rujukan }}</td>
             </tr>
             @endforeach
         </tbody>
