@@ -94,7 +94,7 @@ class ProsesController extends Controller
     
     public function getLogout() {
         session()->flush();
-        return redirect('signin');
+        return redirect('');
     }
 
     public function createPasien()
@@ -181,9 +181,12 @@ class ProsesController extends Controller
             $pendaftar->save();
 
             //get data
-            $daftar = Periksa::whereRaw("tgl_periksa = '$gettanggal' && dokter = '".$dokter -> NIDN."'")->count();            
+            $daftar = Periksa::whereRaw("tgl_periksa = '$gettanggal' && dokter = '".$dokter -> NIDN."'")->count();
+            $rand = str_random(5);
+            $tgl = date_create($gettanggal);
+            $ftgl = date_format($tgl, "d F Y");
 
-            return view('result',compact('daftar'));
+            return view('result',compact('daftar', 'rand', 'ftgl'));
         }
     }
 
@@ -219,10 +222,8 @@ class ProsesController extends Controller
             $id = session()->get('id');
 
             $pasien = DB::table('tbl_pasien')
-                    ->join('districts', 'tbl_pasien.kecamatan', '=', 'districts.id')
                     ->join('regencies', 'tbl_pasien.kota', '=', 'regencies.id')
-                    ->join('provinces', 'tbl_pasien.provinsi', '=', 'provinces.id')
-                    ->select('tbl_pasien.*', 'districts.name as nkecamatan', 'regencies.name as nkota', 'provinces.name as nprovinsi')
+                    ->select('tbl_pasien.*', 'regencies.name as nkota')
                     ->where('tbl_pasien.id_akun', $id)
                     ->get();
             

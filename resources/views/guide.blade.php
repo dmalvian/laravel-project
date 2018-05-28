@@ -18,49 +18,49 @@
                             <div class="step-item is-active">
                                 <div class="step-marker">1</div>
                                 <div class="step-details">
-                                <p class="step-title">Account</p>
+                                <p class="step-title">Registrasi Akun</p>
                                 </div>
                             </div>
                             <div class="step-item is-active">
                                 <div class="step-marker">2</div>
                                 <div class="step-details">
-                                <p class="step-title">Account</p>
+                                <p class="step-title">Registrasi Pasien Baru</p>
                                 </div>
                             </div>
                             <div class="step-item is-active">
                                 <div class="step-marker">3</div>
                                 <div class="step-details">
-                                <p class="step-title">Account</p>
+                                <p class="step-title">Pendaftaran</p>
                                 </div>
                             </div>
                             <div class="step-item is-active">
                                 <div class="step-marker">4</div>
                                 <div class="step-details">
-                                <p class="step-title">Account</p>
+                                <p class="step-title">Konfirmasi Pendaftaran</p>
                                 </div>
                             </div>
                             <div class="step-item is-active">
                                 <div class="step-marker">5</div>
                                 <div class="step-details">
-                                <p class="step-title">Account</p>
+                                <p class="step-title">Pendaftaran Berhasil</p>
                                 </div>
                             </div>
                         
                             <div class="steps-content">
                                 <div class="step-content has-text-centered is-active">
-                                    <h2 class="subtitle">Langkah 1</h2>
+                                    <h2 class="subtitle">Membuat akun baru apabila pasien belum memiliki akun.</h2>
                                 </div>
                                 <div class="step-content has-text-centered">
-                                    <h2 class="subtitle">Langkah 2</h2>
+                                    <h2 class="subtitle">Apabila ingin melakukan pendaftaran pasien harus mengisi data diri.</h2>
                                 </div>
                                 <div class="step-content has-text-centered">
-                                    <h2 class="subtitle">Langkah 3</h2>
+                                    <h2 class="subtitle">Pasien melakukan pendaftaran.</h2>
                                 </div>
                                 <div class="step-content has-text-centered">
-                                    <h2 class="subtitle">Langkah 4</h2>
+                                    <h2 class="subtitle">Pasien mengecek ulang identitas diri.</h2>
                                 </div>
                                 <div class="step-content has-text-centered">
-                                    <h2 class="subtitle">Langkah 5</h2>
+                                    <h2 class="subtitle">Pendaftaran telah berhasil dilakukan.</h2>
                                 </div>
                             </div>
                             <div class="steps-actions">

@@ -23,8 +23,12 @@
 
     .footer-content {
       padding: 1.5em;
-      background: rgba(255,255,255,.5);
+      background: rgba(0,0,0,.5);
     }
+
+    .cust-font {
+            font-family: "Bodoni MT Black", sans-serif;
+        }
   </style>
 @endsection
 
@@ -61,7 +65,7 @@
         <div class="container">
           <div class="navbar-brand">
             <a href="#" class="navbar-item">
-              <h2 class="title">RSing</h2>
+              <h2 class="title cust-font">RSing</h2>
             </a>
             <span class="navbar-burger burger" data-target="navMenuHero">
               <span></span>
@@ -88,7 +92,7 @@
                 </a>
               </span>
               <span class="navbar-item">
-                <a href="" class="button is-white is-outlined">
+                <a href="{{ url('guide') }}" class="button is-white is-outlined">
                   <span class="icon">
                     <i class="fa fa-book"></i>
                   </span>
@@ -104,10 +108,7 @@
     <div class="hero-foot">
       <div class="container is-fullhd">
         <div class="content has-text-centered footer-content">
-          <p>
-            <strong>Bulma</strong> by <a href="https://jgthms.com">Jeremy Thomas</a>. The source code is licensed
-            <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
-            is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
+          <p>&copy; 2018 - Rumah Sakit Dalam Jaringan (Online)
           </p>
         </div>
       </div>
