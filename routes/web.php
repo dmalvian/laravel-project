@@ -37,6 +37,11 @@ Route::get('/medic/dokter/{id}', 'MedicController@getDokter');
 Route::get('/patient','ProsesController@patient');
 
 // Area Admin
+Route::get('admin','AdminController@createsignIn');
+Route::post('admin','AdminController@signIn');
+Route::get('admin/dashboard','AdminController@dashboard');
+Route::get('logout','AdminController@logout');
+
 Route::get('/spesialis/create', function() {
     return view('spesialis.create');
 });
