@@ -40,17 +40,10 @@ Route::get('/patient','ProsesController@patient');
 Route::get('admin','AdminController@createsignIn');
 Route::post('admin','AdminController@signIn');
 Route::get('admin/dashboard','AdminController@dashboard');
-Route::get('logout','AdminController@logout');
-
-Route::get('/spesialis/create', function() {
-    return view('spesialis.create');
-});
-Route::get('/rs/create', function() {
-    return view('rs.create');
-});
-Route::get('/dokter/create', function() {
-    return view('dokter.create');
-});
+Route::get('admin/logout','AdminController@logout');
+Route::get('admin/add','AdminController@createAdd');
+Route::post('admin/add','AdminController@storeData');
+Route::get('admin/cari', 'AdminController@cariData');
 
 Route::get('qr-code/{id}', function ($id) {
   return QRCode::text($id)->setSize(8)->png();
@@ -64,12 +57,4 @@ Route::get('pasien', 'ProsesController@indexPasien');
 
 Route::get('guide', function() {
     return view('guide');
-});
-
-Route::get('admin/dashboard', function () {
-    return view('admin.dashboard');
-});
-
-Route::get('admin/create', function () {
-    return view('admin.create');
 });

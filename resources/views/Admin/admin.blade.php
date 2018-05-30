@@ -18,7 +18,7 @@
                             <form action="{{ url('admin') }}" method="post">
                             @csrf
                                 <div class="field">
-                                    <label class="label">Username</label>
+                                    <label class="label">Username {{ session()->get('rumah_sakit') }}</label>
                                     <div class="control">
                                     <input class="input" type="text" name="username" placeHolder="Username" value="{{ old('username') }}" required>
                                     </div>

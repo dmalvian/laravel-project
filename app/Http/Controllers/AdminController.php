@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Admin;
+use App\Pasien;
+use DB;
 
 class AdminController extends Controller
 {
     public function createsignIn()
     {
-        if(session()->get('rumah_sakit')!= null){
+        if(session()->get('rumah_sakit') != null){
             return redirect('admin/dashboard');
         }else{
             return view('admin/admin');
@@ -34,18 +36,71 @@ class AdminController extends Controller
             return redirect('admin')->with('message', 'Anda belum mengisi email dan password dengan benar !');
         }        
     }
+
     public function dashboard()
     {
-        if(session()->get('rumah_sakit')!= null){
-            return view('admin/dashboard');
-        } 
-        
-		return redirect('admin')->with('message','Bukan Admin Ya !');
+        if(session()->get('rumah_sakit') != null){
+            $rs = session()->get('rumah_sakit');
+            $pasien = DB::table('tbl_rm')
+                        ->join('tbl_pasien','tbl_rm.ktp','=','tbl_pasien.no_ktp')
+                        ->join('tbl_spesialis','tbl_rm.spesialis','=','tbl_spesialis.kode_spesialis')
+                        ->join('tbl_dokter','tbl_rm.dokter','=','tbl_dokter.NIDN')
+                        ->select('tbl_rm.*','tbl_pasien.nama_pasien as npasien','tbl_spesialis.nama_spesialis as nspesialis','tbl_dokter.nama_dokter as ndokter')
+                        ->where('tbl_rm.rumah_sakit', $rs)
+                        ->get();
+            return view('admin.dashboard', compact('pasien'));
+        }else{
+            return redirect('admin')->with('message','Bukan Admin Ya !');
+        }
+    }
+
+    public function cariData(Request $request)
+    {
+        $query = $request->get('keyword');
+        $pasien = DB::table('tbl_rm')
+                        ->join('tbl_pasien','tbl_rm.ktp','=','tbl_pasien.no_ktp')
+                        ->join('tbl_spesialis','tbl_rm.spesialis','=','tbl_spesialis.kode_spesialis')
+                        ->join('tbl_dokter','tbl_rm.dokter','=','tbl_dokter.NIDN')
+                        ->select('tbl_rm.*','tbl_pasien.nama_pasien as npasien','tbl_spesialis.nama_spesialis as nspesialis','tbl_dokter.nama_dokter as ndokter')
+                        ->where('tbl_dokter.nama_dokter', 'like','%' .$query.'%')
+                        ->orwhere('tbl_pasien.nama_pasien','like','%'.$query.'%')
+                        ->get();
+
+        return view('admin.dashboard',compact('pasien'));
     }
 
     public function logout()
     {
         session()->flush();
         return redirect('admin');
+    }
+
+    public function createAdd()
+    {
+        return view('admin/create');
+    }
+
+    public function storeData(Request $request)
+    {
+        $validate = RM::whereRaw("ktp = '$request->no_ktp'")->first();
+        if($validate)
+        {
+            return redirect('/pasien/add')->with('message','Pasien Sudah Terdaftar');
+        }else{
+            $pasien = new RM();
+            $pasien -> tgl_rm = $request -> tgl_rm ;
+            $pasien -> ktp = $request -> no_ktp  ;
+            $pasien -> rumah_sakit = session()->get('rumah_sakit');
+            $pasien -> spesialis = $request -> kd_spesialis ;
+            $pasien -> dokter = $request -> nidn ;
+            $pasien -> keluhan = $request -> keluhan ;
+            $pasien -> pemeriksaan = $request -> pemeriksaan ;
+            $pasien -> diagnosa = $request -> diagnosa ;
+            $pasien -> resep = $request -> resep ;
+
+            $pasien->save();
+
+            return redirect('admin/dashboard');
+        }
     }
 }

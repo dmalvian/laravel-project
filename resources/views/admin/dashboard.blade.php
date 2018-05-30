@@ -1,4 +1,4 @@
-@extends('base-dashboard')    
+@extends('base-admin-dashboard')    
 
 @section('title','Dashboard')
 
@@ -8,40 +8,43 @@
     <nav class="level">
         <!-- Left side -->
         <div class="level-left">
-            <p class="level-item"><a class="button is-success">Tambah</a></p>
+            <p class="level-item"><a href="{{ url('admin/add') }}"class="button is-success">Tambah</a></p>
         </div>
         
         <!-- Right side -->
         <div class="level-right">
-            <div class="level-item">
-            <div class="field has-addons">
-                <p class="control">
-                <input class="input" type="text" placeholder="Find a data">
-                </p>
-                <p class="control">
-                <button class="button">
-                    Search
-                </button>
-                </p>
-            </div>
-            </div>
+                <form class="offset-sm-10" action="{{ url('admin/cari') }}" action="post">
+                    <input class="input offset-8" name="keyword" type="text" placeholder="Find a data">
+                    <button class="button offset-2" type="submit">
+                        Search
+                    </button>
+                    </p>
+                </form>
         </div>
     </nav>
     <table class="table is-fullwidth is-bordered is-striped">
         <thead>
             <tr>
-                <th>No KTP</th>
+                <th>Tanggal Periksa</th>
                 <th>Nama Pasien</th>
-                <th>KTP</th>
-                <th>Gol. Darah</th>
-                <th>Kota</th>
-                <th>Nomor BPJS</th>
-                <th>Nomor Rujukan</th>
+                <th>Spesialis</th>
+                <th>Dokter</th>
+                <th>Pemeriksaan</th>
+                <th>Diagnosa</th>
             </tr>
         </thead>
         <tbody>
-            
-        </tbody>
+        @foreach($pasien as $data)
+            <tr>
+                <td>{{ $data -> tgl_rm }}</td>
+                <td>{{ $data -> npasien }}</td>
+                <td>{{ $data -> nspesialis }}</td>
+                <td>{{ $data -> ndokter }}</td>
+                <td>{{ $data -> pemeriksaan }}</td>
+                <td>{{ $data -> diagnosa }}</td>
+            </tr>
+        @endforeach
+       </tbody>
     </table>
 </div>
 @endsection 

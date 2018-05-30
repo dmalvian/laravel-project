@@ -2,6 +2,50 @@
 
 @section('title','Tambah Data Rekam Medis')
 
+@section('assets')
+<script
+  src="{{ asset('js/jquery-3.3.1.min.js') }}"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+<script>
+    $(document).ready(function(){
+        $.getJSON("{{ url('medic/rs') }}", function(result){
+            $.each(result, function(i, item){
+                $("<option>"+item.nama_RS+"</option>").attr('value', item.kode_RS).appendTo("#rumah_sakit");
+            });
+        });
+
+        $("#rumah_sakit").change(function() {
+            var id_spesialis = $('option:selected', this).attr('value');
+            $.getJSON("{{ url('medic/spesialis') }}/"+id_spesialis, function(result){
+                $("#spesialis").html($("<option>Pilih Spesialis</option>").attr('value', ''));
+                $("#dokter").html($("<option>Pilih Dokter</option>").attr('value', ''));
+                $.each(result, function(i, item){
+                    $("<option>"+item.nama_spesialis+"</option>").attr('value', item.kode_spesialis).appendTo("#spesialis");
+                });
+            });
+        });
+
+        $("#spesialis").change(function() {
+            var id_dokter = $('option:selected', this).attr('value');
+            $.getJSON("{{ url('medic/dokter') }}/"+id_dokter, function(result){
+                $("#dokter").html($("<option>Pilih Dokter</option>").attr('value', ''));
+                $.each(result, function(i, item){
+                    $("<option>"+item.nama_dokter+" - "+item.hari+"</option>").attr('value', item.NIDN).appendTo("#dokter");
+                });
+            });
+        });
+
+        $.getJSON("{{ url('patient') }}", function(result){
+            $.each(result, function(i, item){
+                $("<option>"+item.nama_pasien+"</option>").attr('value', item.nama_pasien).appendTo("#pasien");
+            });
+        });
+    });
+</script>
+@endsection
+
 @section('content')    
     <section class="hero is-light is-fullheight">
         <div class="hero-body">
@@ -12,12 +56,12 @@
                         <p class="subtitle has-text-grey has-text-centered">Tambah Data Rekam Medis</p>
     
                         <div class="box">
-                            <form action="{{ url('Register') }}" method="post">
+                            <form action="{{ url('admin/add') }}" method="post">
                             {{ csrf_field() }}
                                 <div class="field">
                                     <label class="label">Tanggal</label>
                                     <div class="control">
-                                    <input class="input" type="date" name="tgl_periksa" required>
+                                    <input class="input" type="date" name="tgl_rm" required>
                                     </div>
                                 </div>
                                 <div class="field">

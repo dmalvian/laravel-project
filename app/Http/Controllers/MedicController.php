@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\RS;
 use App\Spesialis;
 use App\Dokter;
+use App\Pasien;
 
 class MedicController extends Controller
 {
@@ -29,4 +30,5 @@ class MedicController extends Controller
 
         return response()->json($dokter);
     }
+
 }
