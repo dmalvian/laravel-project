@@ -65,3 +65,11 @@ Route::get('pasien', 'ProsesController@indexPasien');
 Route::get('guide', function() {
     return view('guide');
 });
+
+Route::get('admin/dashboard', function () {
+    return view('admin.dashboard');
+});
+
+Route::get('admin/create', function () {
+    return view('admin.create');
+});
