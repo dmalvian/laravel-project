@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Admin;
 use App\Pasien;
+use App\RM;
+use App\Spesialis;
+use App\Dokter;
 use DB;
 
 class AdminController extends Controller
@@ -69,6 +72,30 @@ class AdminController extends Controller
         return view('admin.dashboard',compact('pasien'));
     }
 
+    public function pasien()
+    {
+        $rs = session()->get('rumah_sakit');
+        $pasien = DB::table('tbl_periksa')
+                    ->join('tbl_pasien','tbl_periksa.no_ktp','=','tbl_pasien.no_ktp')
+                    ->select('tbl_pasien.no_ktp','tbl_pasien.nama_pasien','tbl_periksa.*')
+                    ->where('tbl_periksa.rumah_sakit','=',$rs)
+                    ->get();
+        return response()->json($pasien);
+    }
+
+    public function spesialis()
+    {
+        $rs = session()->get('rumah_sakit');
+        $spesialis = Spesialis::where('kode_RS', $rs)->get();
+        return response()->json($spesialis);
+    }
+
+    public function dokter($id)
+    {
+        $dokter = Dokter::where('kode_spesialis',$id)->get();
+        return response()->json($dokter);
+    }
+
     public function logout()
     {
         session()->flush();
@@ -77,7 +104,11 @@ class AdminController extends Controller
 
     public function createAdd()
     {
-        return view('admin/create');
+        if(session()->get('rumah_sakit') != null){
+            return view('admin.create');
+        }else{
+            return redirect('admin')->with('message','Bukan Admin Ya !');
+        }
     }
 
     public function storeData(Request $request)
