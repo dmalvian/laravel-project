@@ -14,11 +14,16 @@
         <!-- Right side -->
         <div class="level-right">
                 <form class="offset-sm-10" action="{{ url('admin/cari') }}" action="post">
-                    <input class="input offset-8" name="keyword" type="text" placeholder="Find a data">
-                    <button class="button offset-2" type="submit">
-                        Search
-                    </button>
-                    </p>
+                    <div class="field has-addons">
+                        <div class="control">
+                            <input class="input offset-8" name="keyword" type="text" placeholder="Find a data">
+                        </div>
+                        <div class="control">
+                            <button class="button offset-2" type="submit">
+                                Search
+                            </button>
+                        </div>
+                    </div>
                 </form>
         </div>
     </nav>
