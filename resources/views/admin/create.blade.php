@@ -4,42 +4,30 @@
 
 @section('assets')
 <script
-  src="{{ asset('js/jquery-3.3.1.min.js') }}"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
+  src="{{ asset('js/jquery-3.3.1.min.js') }}">
+  </script>
 
 <script>
     $(document).ready(function(){
-        $.getJSON("{{ url('medic/rs') }}", function(result){
+        $.getJSON("{{ url('admin/spesialis') }}", function(result){
             $.each(result, function(i, item){
-                $("<option>"+item.nama_RS+"</option>").attr('value', item.kode_RS).appendTo("#rumah_sakit");
+                $("<option>"+item.nama_spesialis+"</option>").attr('value', item.kode_spesialis).appendTo("#kd_spesialis");
             });
         });
 
-        $("#rumah_sakit").change(function() {
-            var id_spesialis = $('option:selected', this).attr('value');
-            $.getJSON("{{ url('medic/spesialis') }}/"+id_spesialis, function(result){
-                $("#spesialis").html($("<option>Pilih Spesialis</option>").attr('value', ''));
+        $("#kd_spesialis").change(function() {
+            var id_dokter= $('option:selected', this).attr('value');
+            $.getJSON("{{ url('admin/dokter') }}/"+id_dokter, function(result){
                 $("#dokter").html($("<option>Pilih Dokter</option>").attr('value', ''));
                 $.each(result, function(i, item){
-                    $("<option>"+item.nama_spesialis+"</option>").attr('value', item.kode_spesialis).appendTo("#spesialis");
+                    $("<option>"+item.nama_dokter+" - "+item.hari+"</option>").attr('value', item.NIDN).appendTo("#nidn");
                 });
             });
         });
 
-        $("#spesialis").change(function() {
-            var id_dokter = $('option:selected', this).attr('value');
-            $.getJSON("{{ url('medic/dokter') }}/"+id_dokter, function(result){
-                $("#dokter").html($("<option>Pilih Dokter</option>").attr('value', ''));
-                $.each(result, function(i, item){
-                    $("<option>"+item.nama_dokter+" - "+item.hari+"</option>").attr('value', item.NIDN).appendTo("#dokter");
-                });
-            });
-        });
-
-        $.getJSON("{{ url('patient') }}", function(result){
+        $.getJSON("{{ url('admin/pasien') }}", function(result){
             $.each(result, function(i, item){
-                $("<option>"+item.nama_pasien+"</option>").attr('value', item.nama_pasien).appendTo("#pasien");
+                $("<option>"+item.nama_pasien+"</option>").attr('value', item.no_ktp).appendTo("#no_ktp");
             });
         });
     });
@@ -68,7 +56,7 @@
                                     <label class="label">Spesialis</label>
                                     <div class="control">
                                         <div class="select">
-                                            <select name="kd_spesialis">
+                                            <select name="kd_spesialis" id="kd_spesialis">
                                                 <option>Pilih Spesialis</option>
                                             </select>
                                         </div>
@@ -78,7 +66,7 @@
                                     <label class="label">Nama Dokter</label>
                                     <div class="control">
                                         <div class="select">
-                                            <select name="nidn">
+                                            <select name="nidn" id="nidn">
                                                 <option>Pilih Dokter</option>
                                             </select>
                                         </div>
@@ -89,7 +77,7 @@
                                     <label class="label">Pasien</label>
                                     <div class="control">
                                         <div class="select">
-                                            <select name="no_ktp">
+                                            <select name="no_ktp" id="no_ktp" required>
                                                 <option>Pilih Pasien</option>
                                             </select>
                                         </div>

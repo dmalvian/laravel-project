@@ -44,6 +44,9 @@ Route::get('admin/logout','AdminController@logout');
 Route::get('admin/add','AdminController@createAdd');
 Route::post('admin/add','AdminController@storeData');
 Route::get('admin/cari', 'AdminController@cariData');
+Route::get('admin/pasien','AdminController@pasien');
+Route::get('admin/spesialis','AdminController@spesialis');
+Route::get('admin/dokter/{id}','AdminController@dokter');
 
 Route::get('qr-code/{id}', function ($id) {
   return QRCode::text($id)->setSize(8)->png();
